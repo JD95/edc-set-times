@@ -48,14 +48,14 @@ data class Stage(val name: FestivalStage, val setTimes: List<SetTime>)
 data class SetTime(val artist: String, val start: String)
 
 val friday: FestivalDay = FestivalDay(
-    date = LocalDate.parse("2024-05-17", dateOnlyFormat),
+    date = LocalDate.parse("2024-05-09", dateOnlyFormat),
     stages = listOf(
         Stage(
             FestivalStage.KineticField,
             listOf(
-                SetTime("Carola", "19:00"),
-                SetTime("Pauline Herr", "20:00"),
-                SetTime("Kream", "21:05"),
+                SetTime("Carola", "10:00"),
+                SetTime("Pauline Herr", "11:00"),
+                SetTime("Kream", "13:05"),
                 SetTime("Sidepiece", "22:16"),
             )
         ),
@@ -66,6 +66,140 @@ val friday: FestivalDay = FestivalDay(
                 SetTime("Memba", "20:25"),
                 SetTime("Kaivon", "21:30"),
                 SetTime("Matroda", "22:30"),
+                SetTime("Griz", "22:30"),
+                SetTime("Said the Sky", "01:35"),
+            )
+        ),
+        Stage(
+            FestivalStage.CircuitGrounds,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.NeonGarden,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.Basspod,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.Wasteland,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.QuantumValley,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.StereoBloom,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.BionicJungle,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+    )
+)
+val saturday: FestivalDay = FestivalDay(
+    date = LocalDate.parse("2024-05-18", dateOnlyFormat),
+    stages = listOf(
+        Stage(
+            FestivalStage.KineticField,
+            listOf(
+                SetTime("DJ RON", "19:00"),
+                SetTime("Backseat", "20:00"),
+                SetTime("Whoopie", "21:05"),
+                SetTime("Toast", "22:16"),
+            )
+        ),
+        Stage(
+            FestivalStage.CosmicMeadow,
+            listOf(
+                SetTime("Buttercream", "19:00"),
+                SetTime("Rizz", "20:25"),
+                SetTime("Gawk Gawk", "21:30"),
+                SetTime("Get2DaChoppa", "22:30"),
+                SetTime("Griz", "22:30"),
+                SetTime("Said the Sky", "01:35"),
+            )
+        ),
+        Stage(
+            FestivalStage.CircuitGrounds,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.NeonGarden,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.Basspod,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.Wasteland,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.QuantumValley,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.StereoBloom,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+        Stage(
+            FestivalStage.BionicJungle,
+            listOf(
+                SetTime("Carola", "19:00")
+            )
+        ),
+    )
+)
+val sunday: FestivalDay = FestivalDay(
+    date = LocalDate.parse("2024-05-19", dateOnlyFormat),
+    stages = listOf(
+        Stage(
+            FestivalStage.KineticField,
+            listOf(
+                SetTime("Arnold", "19:00"),
+                SetTime("Bach", "20:00"),
+                SetTime("Beethoven", "21:05"),
+                SetTime("Sidepiece", "22:16"),
+            )
+        ),
+        Stage(
+            FestivalStage.CosmicMeadow,
+            listOf(
+                SetTime("Iron Man", "19:00"),
+                SetTime("Dr Strange", "20:25"),
+                SetTime("Harvey Dent", "21:30"),
+                SetTime("Peter Parker", "22:30"),
                 SetTime("Griz", "22:30"),
                 SetTime("Said the Sky", "01:35"),
             )
