@@ -38,8 +38,8 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
 import androidx.wear.compose.material.*
+import com.example.festivalsettimes.R
 import com.example.festivalsettimes.presentation.theme.FestivalSetTimesTheme
 import kotlinx.coroutines.*
 import java.time.LocalDate
@@ -51,12 +51,9 @@ import java.time.format.DateTimeFormatter
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val setTimes = this.applicationContext.getString(R.string.edc_set_times)
         setContent {
-            val focusRequester = remember { FocusRequester() }
-            WearApp(object : AppViewModel() {
-                override val focusRequester: FocusRequester
-                    get() = focusRequester
-            })
+            WearApp(getFestivalDaysFromString(setTimes))
         }
     }
 }
@@ -65,7 +62,7 @@ class MainActivity : ComponentActivity() {
  * ScrollableState integration for Horizontal Pager.
  */
 @OptIn(ExperimentalFoundationApi::class)
-public class PagerScrollHandler @OptIn(ExperimentalFoundationApi::class) constructor(
+class PagerScrollHandler @OptIn(ExperimentalFoundationApi::class) constructor(
     private val numPages: Int,
     private val pagerState: PagerState,
     private val coroutineScope: CoroutineScope
@@ -113,17 +110,12 @@ public class PagerScrollHandler @OptIn(ExperimentalFoundationApi::class) constru
 }
 
 val dateOnlyFormat: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-val timeOnlyFormat: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
-
-abstract class AppViewModel() : ViewModel() {
-
-    abstract val focusRequester: FocusRequester
-}
+val timeOnlyFormatParse: DateTimeFormatter = DateTimeFormatter.ofPattern("[H][HH]:mm")
+val timeOnlyFormatDisplay: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun WearApp(viewModel: AppViewModel) {
-    val days = listOf(friday, saturday, sunday)
+fun WearApp(days: List<FestivalDay>) {
     val currentDate = remember { mutableStateOf(LocalDateTime.now()) }
     val currentTime = remember { mutableStateOf(LocalTime.now()) }
 
@@ -187,7 +179,7 @@ fun WearApp(viewModel: AppViewModel) {
                 HorizontalPageIndicator(
                     pageIndicatorState = object : PageIndicatorState {
                         override val pageCount: Int
-                            get() = 9
+                            get() = day.stages.size
                         override val pageOffset: Float
                             get() = horiState.currentPageOffsetFraction
                         override val selectedPage: Int
@@ -285,14 +277,14 @@ private fun SetTimePager(
         ) {
             val set = stage.setTimes[y]
 
-            val startTime = LocalTime.parse(set.start, timeOnlyFormat)
+            val startTime = set.start
             val setStartDay = if (startTime.hour > 6) {
                 day.date
             } else {
                 day.date.plusDays(1)
             }
             val start = LocalDateTime.parse(
-                "${setStartDay.format(dateOnlyFormat)} ${set.start}",
+                "${setStartDay.format(dateOnlyFormat)} ${set.start.format(timeOnlyFormatDisplay)}",
                 timeFormat
             )
 
@@ -300,9 +292,8 @@ private fun SetTimePager(
             val nextSetStart = stage
                 .setTimes
                 .map { s -> s.start }
-                .getOrElse(y + 1) { "06:00" }
-            val endTime = LocalTime.parse(nextSetStart, timeOnlyFormat)
-            val setEndDay = if (endTime.hour > 6) {
+                .getOrElse(y + 1) { LocalTime.parse("06:00", timeOnlyFormatParse) }
+            val setEndDay = if (nextSetStart.hour > 6) {
                 day.date
             } else {
                 day.date.plusDays(1)
@@ -328,6 +319,7 @@ private fun SetTimePager(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun TimeButton(
     day: FestivalDay,
@@ -343,7 +335,7 @@ private fun TimeButton(
             val page = day.stages[horiState.currentPage].setTimes
                 .indexOfLast {
                     val now = LocalTime.now()
-                    val start = LocalTime.parse(it.start, timeOnlyFormat)
+                    val start = it.start
                     now.isAfter(start)
                 }
             coroutineScope.launch {
@@ -355,7 +347,7 @@ private fun TimeButton(
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             color = Color.White,
-            text = currentTime.value.format(timeOnlyFormat),
+            text = currentTime.value.format(timeOnlyFormatDisplay),
             fontSize = 20.sp,
         )
     }
@@ -367,9 +359,46 @@ val gridTimeFormat: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 @Preview(device = Devices.WEAR_OS_LARGE_ROUND, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
-    val focusRequester = remember { FocusRequester() }
-    WearApp(object : AppViewModel() {
-        override val focusRequester: FocusRequester
-            get() = focusRequester
-    })
+    WearApp(
+        getFestivalDaysFromString(
+            """
+2024-05-17,Bionic Jungle,Baggi B2B Matt Denuzzo,17:00
+2024-05-17,Cosmic Meadow,Friendly Fire,17:00
+2024-05-17,Cosmic Meadow,Noizu B2B Westend B2B Mele,17:30
+2024-05-17,Quantum Valley,Alchimyst,19:00
+2024-05-17,Circuit Grounds,Brina Knauss,19:00
+2024-05-17,Neon Garden,Heidi Lawden,19:00
+2024-05-18,Kinetic Field,Matroda,22:00
+2024-05-18,Wasteland,Atmozfears,22:30
+2024-05-18,Quantum Valley,Bryan Kearney,22:30
+2024-05-18,Bionic Jungle,DJ Heartstring,22:30
+2024-05-18,Basspod,Wilkinson,22:30
+2024-05-18,Stereo Bloom,Eli Brown,23:15
+2024-05-18,Kinetic Field,DJ Snake,23:18
+2024-05-18,Wasteland,Adrenalize B2B Wasted Penguinz,23:30
+2024-05-18,Quantum Valley,Andrew Bayer,23:30
+2024-05-18,Circuit Grounds,Special Guest,23:30
+2024-05-18,Basspod,Wooli,23:30
+2024-05-19,Neon Garden,Peggy Gou,0:00
+2024-05-19,Cosmic Meadow,Deorro,0:15
+2024-05-19,Quantum Valley,Ferry Corsten,0:30
+2024-05-19,Basspod,Hedex,0:30
+2024-05-19,Stereo Bloom,Kevin de Vries,0:30
+2024-05-19,Bionic Jungle,Skin On Skin,0:30
+2024-05-19,Bionic Jungle,Ranger Trucco,23:00
+2024-05-19,Cosmic Meadow,Sofi Tukker (DJ Set),23:00
+2024-05-19,Circuit Grounds,Seven Lions,23:02
+2024-05-19,Kinetic Field,Alesso,23:18
+2024-05-19,Basspod,Dimension,23:30
+2024-05-19,Wasteland,Lady Faith,23:30
+2024-05-19,Stereo Bloom,Shiba San,23:30
+2024-05-20,Quantum Valley,Yotto,0:00
+2024-05-20,Cosmic Meadow,Diplo,0:15
+2024-05-20,Circuit Grounds,Martin Garrix,0:15
+2024-05-20,Basspod,ATLiens,0:30
+2024-05-20,Wasteland,Devin Wild B2B Keltek,0:30
+2024-05-20,Stereo Bloom,HUGEL x Friends,0:30
+            """.trimIndent()
+        )
+    )
 }

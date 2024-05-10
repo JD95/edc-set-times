@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<string name="edc_set_times">
+"2024-05-17,Bionic Jungle,Baggi B2B Matt Denuzzo,17:00
+2024-05-17,Cosmic Meadow,Friendly Fire,17:00
+2024-05-17,Cosmic Meadow,Noizu B2B Westend B2B Mele,17:30
+2024-05-17,Quantum Valley,Alchimyst,19:00
+2024-05-17,Circuit Grounds,Brina Knauss,19:00
+2024-05-17,Neon Garden,Heidi Lawden,19:00
+2024-05-17,Cosmic Meadow,Khiva,19:00
+2024-05-17,Basspod,Nightstalker,19:00
+2024-05-17,Wasteland,Water Spirit,19:00
+2024-05-17,Bionic Jungle,Zen Freeman,19:00
+2024-05-17,Stereo Bloom,ZOF,19:00
+2024-05-17,Basspod,VUIIIGUR,19:30
+2024-05-17,Circuit Grounds,Cristoph,20:00
+2024-05-17,Stereo Bloom,Majestic,20:00
+2024-05-17,Kinetic Field,Ownboss,20:00
+2024-05-17,Quantum Valley,Paul Oakenfold,20:00
+2024-05-17,Cosmic Meadow,Sicaria,20:20
+2024-05-17,Neon Garden,Chelina Manuhutu,20:30
+2024-05-17,Bionic Jungle,Marlie,20:30
+2024-05-17,Basspod,Tape B,20:30
+2024-05-17,Wasteland,Yosuf,20:30
+2024-05-17,Kinetic Field,Maddix,21:00
+2024-05-17,Quantum Valley,Nifra,21:00
+2024-05-17,Stereo Bloom,Riordan,21:00
+2024-05-17,Circuit Grounds,Cassian,21:15
+2024-05-17,Wasteland,D-Sturb,21:30
+2024-05-17,Basspod,LAYZ,21:30
+2024-05-17,Cosmic Meadow,Hamdi,21:45
+2024-05-17,Quantum Valley,Giuseppe Ottaviani,22:00
+2024-05-17,Neon Garden,Lilly Palmer,22:00
+2024-05-17,Stereo Bloom,Max Styler,22:00
+2024-05-17,Bionic Jungle,Sally C B2B Matisa,22:00
+2024-05-17,Kinetic Field,MK,22:06
+2024-05-17,Basspod,Jessica Audiffred,22:30
+2024-05-17,Wasteland,Keltek,22:30
+2024-05-17,Circuit Grounds,Vintage Culture,22:30
+2024-05-17,Quantum Valley,Andrew Rayel,23:00
+2024-05-17,Stereo Bloom,Odd Mob x Omnom,23:00
+2024-05-17,Cosmic Meadow,Dabin,23:05
+2024-05-17,Kinetic Field,Subtronics,23:18
+2024-05-17,Bionic Jungle,Jyoty,23:30
+2024-05-17,Basspod,NGHTMRE,23:30
+2024-05-17,Neon Garden,Nicole Moudaber,23:30
+2024-05-17,Wasteland,Sound Rush,23:30
+2024-05-18,Stereo Bloom,J. Worra,0:00
+2024-05-18,Quantum Valley,Markus Schulz,0:00
+2024-05-18,Circuit Grounds,Peggy Gou,0:00
+2024-05-18,Cosmic Meadow,Slander,0:20
+2024-05-18,Wasteland,Warface,0:30
+2024-05-18,Basspod,Zomby,0:30
+2024-05-18,Kinetic Field,Armin van Buuren,0:31
+2024-05-18,Neon Garden,Adam Beyer,1:00
+2024-05-18,Quantum Valley,Blastoyz,1:00
+2024-05-18,Bionic Jungle,Denis Sulta,1:00
+2024-05-18,Stereo Bloom,Matroda B2B San Pacho,1:00
+2024-05-18,Circuit Grounds,Eric Prydz,1:30
+2024-05-18,Wasteland,Kayzo x Space Laces x Must Die!,1:30
+2024-05-18,Basspod,MARAUDA,1:30
+2024-05-18,Kinetic Field,Illenium,1:47
+2024-05-18,Cosmic Meadow,LSDREAM,1:50
+2024-05-18,Quantum Valley,Infected Mushroom,2:00
+2024-05-18,Stereo Bloom,Noizu,2:15
+2024-05-18,Wasteland,Audiofreq,2:30
+2024-05-18,Neon Garden,Carl Cox,2:30
+2024-05-18,Bionic Jungle,HAAi,2:30
+2024-05-18,Basspod,HOL!,2:30
+2024-05-18,Kinetic Field,David Getta,3:00
+2024-05-18,Cosmic Meadow,Devault,3:00
+2024-05-18,Circuit Grounds,John Summit,3:00
+2024-05-18,Quantum Valley,Orjan Nilsen x Mark Sixma,3:00
+2024-05-18,Basspod,Adventure Club,3:30
+2024-05-18,Wasteland,Hixxy,3:30
+2024-05-18,Stereo Bloom,MISS DRE,3:30
+2024-05-18,Neon Garden,Carl Cox B2B Nicole Moudaber,4:00
+2024-05-18,Bionic Jungle,Justin Jay,4:00
+2024-05-18,Quantum Valley,Taylor Torrence,4:00
+2024-05-18,Cosmic Meadow,FrostTop B2B RemK,4:10
+2024-05-18,Kinetic Field,Steve Aoki,4:13
+2024-05-18,Stereo Bloom,Andruss,4:30
+2024-05-18,Circuit Grounds,Before Dawn,4:30
+2024-05-18,Wasteland,Clawz B2B Domina,4:30
+2024-05-18,Basspod,Mersiv,4:30
+2024-05-18,Circuit Grounds,Airwolf Paradise,19:00
+2024-05-18,Bionic Jungle,Bianca Oblivion,19:00
+2024-05-18,Cosmic Meadow,Camden Cox,19:00
+2024-05-18,Basspod,Fallen with MC Dino,19:00
+2024-05-18,Stereo Bloom,Joluca,19:00
+2024-05-18,Neon Garden,Malone,19:00
+2024-05-18,Quantum Valley,Miyuki,19:00
+2024-05-18,Kinetic Field,Rayben,19:00
+2024-05-18,Wasteland,SOREN,19:00
+2024-05-18,Basspod,Chef Boyarbeatz,19:30
+2024-05-18,Circuit Grounds,Kyle Walker,20:00
+2024-05-18,Stereo Bloom,Mele,20:00
+2024-05-18,Kinetic Field,MitiS,20:00
+2024-05-18,Bionic Jungle,Panteros666,20:00
+2024-05-18,Cosmic Meadow,Odd Mob,20:15
+2024-05-18,Neon Garden,Ben Sterling,20:30
+2024-05-18,Quantum Valley,Daxson,20:30
+2024-05-18,Wasteland,Kreation B2B Darksiderz,20:30
+2024-05-18,Basspod,Rated R,20:30
+2024-05-18,Circuit Grounds,Ben Hemsley,21:00
+2024-05-18,Kinetic Field,Benny Benassi,21:00
+2024-05-18,Stereo Bloom,Hannah Laing,21:00
+2024-05-18,Bionic Jungle,Interplanetary Criminal,21:15
+2024-05-18,Basspod,Bou,21:30
+2024-05-18,Cosmic Meadow,Boys Noize,21:30
+2024-05-18,Wasteland,GRAVEDGR,21:30
+2024-05-18,Quantum Valley,Talla 2XLC,21:30
+2024-05-18,Circuit Grounds,Four Tet,22:00
+2024-05-18,Stereo Bloom,Kevin Saunderson B2B DJ Minx,22:00
+2024-05-18,Neon Garden,Marcel Dettmann,22:00
+2024-05-18,Kinetic Field,Matroda,22:00
+2024-05-18,Wasteland,Atmozfears,22:30
+2024-05-18,Quantum Valley,Bryan Kearney,22:30
+2024-05-18,Bionic Jungle,DJ Heartstring,22:30
+2024-05-18,Basspod,Wilkinson,22:30
+2024-05-18,Neon Garden,Peggy Gou B2B Marcel Dettmann,23:00
+2024-05-18,Cosmic Meadow,Purple Disco Machine,23:00
+2024-05-18,Stereo Bloom,Eli Brown,23:15
+2024-05-18,Kinetic Field,DJ Snake,23:18
+2024-05-18,Wasteland,Adrenalize B2B Wasted Penguinz,23:30
+2024-05-18,Quantum Valley,Andrew Bayer,23:30
+2024-05-18,Circuit Grounds,Special Guest,23:30
+2024-05-18,Basspod,Wooli,23:30
+2024-05-19,Neon Garden,Peggy Gou,0:00
+2024-05-19,Cosmic Meadow,Deorro,0:15
+2024-05-19,Quantum Valley,Ferry Corsten,0:30
+2024-05-19,Basspod,Hedex,0:30
+2024-05-19,Stereo Bloom,Kevin de Vries,0:30
+2024-05-19,Bionic Jungle,Skin On Skin,0:30
+2024-05-19,Wasteland,Sub Zero Project,0:30
+2024-05-19,Kinetic Field,Tiesto,0:31
+2024-05-19,Circuit Grounds,Dom Dolla,1:00
+2024-05-19,Neon Garden,Jamie Jones,1:00
+2024-05-19,Wasteland,Lil Texas,1:30
+2024-05-19,Quantum Valley,Paul van Dyk,1:30
+2024-05-19,Basspod,Subtronics B2B Level Up,1:30
+2024-05-19,Cosmic Meadow,Dillon Francis,1:45
+2024-05-19,Stereo Bloom,Will Clarke,1:45
+2024-05-19,Kinetic Field,Zedd,1:47
+2024-05-19,Bionic Jungle,X-Coast,2:00
+2024-05-19,Circuit Grounds,Eli Brown B2B HI-LO,2:15
+2024-05-19,Quantum Valley,Aly x Fila,2:30
+2024-05-19,Basspod,Boogie T,2:30
+2024-05-19,Wasteland,Devin Wild,2:30
+2024-05-19,Neon Garden,Loco Dice,2:30
+2024-05-19,Kinetic Field,Alison Wonderland,3:00
+2024-05-19,Stereo Bloom,Matt Sassari,3:00
+2024-05-19,Cosmic Meadow,TroyBoi,3:00
+2024-05-19,Bionic Jungle,Boys Noize B2B VTSS,3:30
+2024-05-19,Basspod,Caspa,3:30
+2024-05-19,Wasteland,Creeds + Helen Ka,3:30
+2024-05-19,Quantum Valley,John 00 Fleming,3:30
+2024-05-19,Circuit Grounds,Wade,3:30
+2024-05-19,Neon Garden,Joseph Capriati,4:00
+2024-05-19,Cosmic Meadow,Sub Focus B2B Dimension,4:00
+2024-05-19,Kinetic Field,ACRAZE B2B Kream,4:13
+2024-05-19,Stereo Bloom,BEC,4:15
+2024-05-19,Basspod,Crankdat,4:30
+2024-05-19,Wasteland,Dead X B2B Levenkhan,4:30
+2024-05-19,Quantum Valley,Metta x Glyde,4:30
+2024-05-19,Circuit Grounds,MK (Sunrise Set),4:30
+2024-05-19,Neon Garden,Adam X,19:00
+2024-05-19,Bionic Jungle,Hint of Lavender,19:00
+2024-05-19,Circuit Grounds,IVY,19:00
+2024-05-19,Cosmic Meadow,Mary Droppinz,19:00
+2024-05-19,Quantum Valley,Naz,19:00
+2024-05-19,Wasteland,Omar Santana,19:00
+2024-05-19,Stereo Bloom,Pocket,19:00
+2024-05-19,Basspod,Richter,19:00
+2024-05-19,Kinetic Field,ZUEZEU,19:00
+2024-05-19,Basspod,JEANIE,19:30
+2024-05-19,Bionic Jungle,Fleur Shore,20:00
+2024-05-19,Quantum Valley,KhoMha,20:00
+2024-05-19,Circuit Grounds,Koven,20:00
+2024-05-19,Kinetic Field,Wuki,20:00
+2024-05-19,Stereo Bloom,Calussa,20:15
+2024-05-19,Cosmic Meadow,Deeper Purpose,20:15
+2024-05-19,Wasteland,GEO,20:30
+2024-05-19,Basspod,Zingara,20:30
+2024-05-19,Kinetic Field,Lost Frequencies,21:00
+2024-05-19,Quantum Valley,Luttrell,21:00
+2024-05-19,Bionic Jungle,Prunk,21:00
+2024-05-19,Neon Garden,Shlomo,21:00
+2024-05-19,Circuit Grounds,Sub Focus,21:00
+2024-05-19,Stereo Bloom,Azzecca,21:30
+2024-05-19,Basspod,Emorfik,21:30
+2024-05-19,Cosmic Meadow,HUGEL,21:30
+2024-05-19,Wasteland,Mandy,21:30
+2024-05-19,Quantum Valley,Jerome Isma-Ae,22:00
+2024-05-19,Circuit Grounds,Sara Landry,22:00
+2024-05-19,Kinetic Field,Mau P,22:06
+2024-05-19,Basspod,Ghastly,22:30
+2024-05-19,Stereo Bloom,LF SYSTEM,22:30
+2024-05-19,Wasteland,Wasted Penguinz,22:30
+2024-05-19,Neon Garden,Deborah De Luca,23:00
+2024-05-19,Quantum Valley,Marsh,23:00
+2024-05-19,Bionic Jungle,Ranger Trucco,23:00
+2024-05-19,Cosmic Meadow,Sofi Tukker (DJ Set),23:00
+2024-05-19,Circuit Grounds,Seven Lions,23:02
+2024-05-19,Kinetic Field,Alesso,23:18
+2024-05-19,Basspod,Dimension,23:30
+2024-05-19,Wasteland,Lady Faith,23:30
+2024-05-19,Stereo Bloom,Shiba San,23:30
+2024-05-20,Quantum Valley,Yotto,0:00
+2024-05-20,Cosmic Meadow,Diplo,0:15
+2024-05-20,Circuit Grounds,Martin Garrix,0:15
+2024-05-20,Basspod,ATLiens,0:30
+2024-05-20,Wasteland,Devin Wild B2B Keltek,0:30
+2024-05-20,Stereo Bloom,HUGEL x Friends,0:30
+2024-05-20,Bionic Jungle,Sidney Charles,0:30
+2024-05-20,Kinetic Field,Gryffin,0:31
+2024-05-20,Neon Garden,Klanguenstler,0:45
+2024-05-20,Quantum Valley,Pryda,1:00
+2024-05-20,Wasteland,Da Tweekaz,1:30
+2024-05-20,Basspod,Svdden Death,1:30
+2024-05-20,Cosmic Meadow,deadmau5,1:45
+2024-05-20,Circuit Grounds,Excision,1:45
+2024-05-20,Stereo Bloom,HoneyLuv,1:45
+2024-05-20,Kinetic Field,Kaskade,1:47
+2024-05-20,Bionic Jungle,Oden x Fatzo,2:00
+2024-05-20,Neon Garden,Indira Paganotto,2:15
+2024-05-20,Quantum Valley,Kevin de Vries,2:15
+2024-05-20,Wasteland,Angerfist,2:30
+2024-05-20,Basspod,Kai Wachi,2:30
+2024-05-20,Stereo Bloom,Sosa,2:45
+2024-05-20,Kinetic Field,Fisher,3:00
+2024-05-20,Circuit Grounds,Kayzo Unleashed XL,3:05
+2024-05-20,Cosmic Meadow,Kasablanca,3:10
+2024-05-20,Wasteland,Deadly Gun,3:30
+2024-05-20,Quantum Valley,Mind Against,3:30
+2024-05-20,Basspod,Virtual Riot,3:30
+2024-05-20,Stereo Bloom,TOBEHONEST,3:45
+2024-05-20,Neon Garden,Trym,3:45
+2024-05-20,Bionic Jungle,East End Dubs,4:00
+2024-05-20,Kinetic Field,John Summit B2B Green Velvet,4:13
+2024-05-20,Cosmic Meadow,Valentino Khan,4:15
+2024-05-20,Circuit Grounds,Timmy Trumpet,4:25
+2024-05-20,Quantum Valley,Argy,4:30
+2024-05-20,Wasteland,DEATH CODE,4:30
+2024-05-20,Basspod,Jon Casey,4:30
+2024-05-20,Stereo Bloom,Abana B2B D. Zeledon,4:45"
+</string>
+
+</resources>
