@@ -4,7 +4,8 @@
  * changes to the libraries and their usages.
  */
 
-@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class,
+@file:OptIn(
+    ExperimentalFoundationApi::class, ExperimentalFoundationApi::class,
     ExperimentalFoundationApi::class
 )
 
@@ -162,132 +163,39 @@ fun WearApp(viewModel: AppViewModel) {
                 focusRequester.requestFocus()
             }
 
-            HorizontalPager(
-                pageCount = day.stages.size,
-                state = horiState,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .onRotaryScrollEvent {
-                        coroutineScope.launch {
-                            pagerScrollHandler.scrollBy(it.verticalScrollPixels)
-                        }
-                        true
-                    }
-                    .focusRequester(focusRequester)
-                    .focusable()
-            ) { x ->
-                val stage = day.stages[x]
-                val stageColor = stageColors[x]
-                VerticalPager(
-                    pageCount = stage.setTimes.size,
-                    state = vertPagerStates[x],
-                ) { y ->
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colors.background),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        val set = stage.setTimes[y]
-
-                        val startTime = LocalTime.parse(set.start, timeOnlyFormat)
-                        val setStartDay = if (startTime.hour > 6) {
-                            day.date
-                        } else {
-                            day.date.plusDays(1)
-                        }
-                        val start = LocalDateTime.parse(
-                            "${setStartDay.format(dateOnlyFormat)} ${set.start}",
-                            timeFormat
-                        )
-
-                        // Everything is over at 6am
-                        val nextSetStart = stage
-                            .setTimes
-                            .map { s -> s.start }
-                            .getOrElse(y + 1) { "06:00" }
-                        val endTime = LocalTime.parse(nextSetStart, timeOnlyFormat)
-                        val setEndDay = if (endTime.hour > 6) {
-                            day.date
-                        } else {
-                            day.date.plusDays(1)
-                        }
-                        val end = LocalDateTime.parse(
-                            "${setEndDay.format(dateOnlyFormat)} $nextSetStart",
-                            timeFormat
-                        )
-
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center,
-                            color = stageColor,
-                            text = set.artist,
-                        )
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center,
-                            color = stageColor,
-                            text = start.format(gridTimeFormat) + " - " + end.format(gridTimeFormat)
-                        )
-                    }
-                }
+            Box(contentAlignment = Alignment.Center) {
+                StagePager(
+                    day,
+                    horiState,
+                    coroutineScope,
+                    pagerScrollHandler,
+                    focusRequester,
+                    stageColors,
+                    vertPagerStates
+                )
 
                 Box(
-                    modifier = Modifier
-                        .size(200.dp)
-                        .padding(25.dp)
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.BottomCenter
                 ) {
                     Column {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center,
-                            color = stageColor,
-                            text = stage.name
-                        )
+                        TimeButton(day, horiState, coroutineScope, vertPagerStates, currentTime)
+                        Spacer(modifier = Modifier.fillMaxHeight(0.2f))
                     }
                 }
-            }
 
-            Box(modifier = Modifier.padding(top = 150.dp, start = 70.dp)) {
-                Column {
-                    Button(
-                        modifier = Modifier
-                            .size(width = 90.dp, height = 30.dp),
-                        onClick = {
-                            val page = day.stages[horiState.currentPage].setTimes
-                                .indexOfLast {
-                                    val now = LocalTime.now()
-                                    val start = LocalTime.parse(it.start, timeOnlyFormat)
-                                    now.isAfter(start)
-                                }
-                            coroutineScope.launch {
-                                vertPagerStates[horiState.currentPage].scrollToPage(page)
-                            }
-                        }
-                    ) {
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center,
-                            color = Color.White,
-                            text = currentTime.value.format(timeOnlyFormat),
-                            fontSize = 20.sp,
-                        )
+                HorizontalPageIndicator(
+                    pageIndicatorState = object : PageIndicatorState {
+                        override val pageCount: Int
+                            get() = 9
+                        override val pageOffset: Float
+                            get() = horiState.currentPageOffsetFraction
+                        override val selectedPage: Int
+                            get() = horiState.currentPage
+
                     }
-                    Spacer(modifier = Modifier.fillMaxHeight(0.2f))
-                }
+                )
             }
-
-            HorizontalPageIndicator(
-                pageIndicatorState = object : PageIndicatorState {
-                    override val pageCount: Int
-                        get() = 9
-                    override val pageOffset: Float
-                        get() = horiState.currentPageOffsetFraction
-                    override val selectedPage: Int
-                        get() = horiState.currentPage
-
-                })
         } else {
             Column(
                 modifier = Modifier
@@ -307,6 +215,150 @@ fun WearApp(viewModel: AppViewModel) {
         }
     }
 
+}
+
+@Composable
+@OptIn(ExperimentalFoundationApi::class)
+private fun StagePager(
+    day: FestivalDay,
+    horiState: PagerState,
+    coroutineScope: CoroutineScope,
+    pagerScrollHandler: PagerScrollHandler,
+    focusRequester: FocusRequester,
+    stageColors: List<Color>,
+    vertPagerStates: List<PagerState>
+) {
+    HorizontalPager(
+        pageCount = day.stages.size,
+        state = horiState,
+        modifier = Modifier
+            .fillMaxSize()
+            .onRotaryScrollEvent {
+                coroutineScope.launch {
+                    pagerScrollHandler.scrollBy(it.verticalScrollPixels)
+                }
+                true
+            }
+            .focusRequester(focusRequester)
+            .focusable()
+    ) { x ->
+        val stage = day.stages[x]
+        val stageColor = stageColors[x]
+        SetTimePager(stage, vertPagerStates, x, day, stageColor)
+
+        Box(
+            modifier = Modifier
+                .size(200.dp)
+                .padding(25.dp)
+        ) {
+            Column {
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    color = stageColor,
+                    text = stage.name
+                )
+            }
+        }
+    }
+}
+
+@Composable
+@OptIn(ExperimentalFoundationApi::class)
+private fun SetTimePager(
+    stage: Stage,
+    vertPagerStates: List<PagerState>,
+    x: Int,
+    day: FestivalDay,
+    stageColor: Color
+) {
+    VerticalPager(
+        pageCount = stage.setTimes.size,
+        state = vertPagerStates[x],
+    ) { y ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.background),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            val set = stage.setTimes[y]
+
+            val startTime = LocalTime.parse(set.start, timeOnlyFormat)
+            val setStartDay = if (startTime.hour > 6) {
+                day.date
+            } else {
+                day.date.plusDays(1)
+            }
+            val start = LocalDateTime.parse(
+                "${setStartDay.format(dateOnlyFormat)} ${set.start}",
+                timeFormat
+            )
+
+            // Everything is over at 6am
+            val nextSetStart = stage
+                .setTimes
+                .map { s -> s.start }
+                .getOrElse(y + 1) { "06:00" }
+            val endTime = LocalTime.parse(nextSetStart, timeOnlyFormat)
+            val setEndDay = if (endTime.hour > 6) {
+                day.date
+            } else {
+                day.date.plusDays(1)
+            }
+            val end = LocalDateTime.parse(
+                "${setEndDay.format(dateOnlyFormat)} $nextSetStart",
+                timeFormat
+            )
+
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                color = stageColor,
+                text = set.artist,
+            )
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                color = stageColor,
+                text = start.format(gridTimeFormat) + " - " + end.format(gridTimeFormat)
+            )
+        }
+    }
+}
+
+@Composable
+private fun TimeButton(
+    day: FestivalDay,
+    horiState: PagerState,
+    coroutineScope: CoroutineScope,
+    vertPagerStates: List<PagerState>,
+    currentTime: MutableState<LocalTime>
+) {
+    Button(
+        modifier = Modifier
+            .size(width = 90.dp, height = 30.dp),
+        onClick = {
+            val page = day.stages[horiState.currentPage].setTimes
+                .indexOfLast {
+                    val now = LocalTime.now()
+                    val start = LocalTime.parse(it.start, timeOnlyFormat)
+                    now.isAfter(start)
+                }
+            coroutineScope.launch {
+                vertPagerStates[horiState.currentPage].scrollToPage(page)
+            }
+        }
+    ) {
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color.White,
+            text = currentTime.value.format(timeOnlyFormat),
+            fontSize = 20.sp,
+        )
+    }
 }
 
 val timeFormat: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
