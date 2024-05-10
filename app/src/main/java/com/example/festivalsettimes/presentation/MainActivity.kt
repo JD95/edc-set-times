@@ -4,15 +4,13 @@
  * changes to the libraries and their usages.
  */
 
-@file:OptIn(ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalFoundationApi::class, ExperimentalFoundationApi::class,
+    ExperimentalFoundationApi::class
+)
 
 package com.example.festivalsettimes.presentation
 
 import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewConfiguration
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -39,19 +37,14 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.view.InputDeviceCompat
-import androidx.core.view.MotionEventCompat
-import androidx.core.view.ViewConfigurationCompat
 import androidx.lifecycle.ViewModel
 import androidx.wear.compose.material.*
 import com.example.festivalsettimes.presentation.theme.FestivalSetTimesTheme
 import kotlinx.coroutines.*
-import java.security.AccessController.getContext
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import kotlin.math.roundToInt
 
 
 class MainActivity : ComponentActivity() {
@@ -70,6 +63,7 @@ class MainActivity : ComponentActivity() {
 /**
  * ScrollableState integration for Horizontal Pager.
  */
+@OptIn(ExperimentalFoundationApi::class)
 public class PagerScrollHandler @OptIn(ExperimentalFoundationApi::class) constructor(
     private val numPages: Int,
     private val pagerState: PagerState,
@@ -151,6 +145,7 @@ fun WearApp(viewModel: AppViewModel) {
     FestivalSetTimesTheme {
         if (day != null) {
 
+            val stageColors = stageColors(day.stages.size)
             val horiState = rememberPagerState()
             val focusRequester = remember { FocusRequester() }
             val coroutineScope = rememberCoroutineScope()
@@ -158,7 +153,7 @@ fun WearApp(viewModel: AppViewModel) {
                 PagerScrollHandler(day.stages.size, horiState, coroutineScope)
             }
             var vertStatesMut = emptyList<PagerState>()
-            day.stages.forEach {
+            repeat(day.stages.size) {
                 vertStatesMut = vertStatesMut.plus(rememberPagerState())
             }
             val vertPagerStates = vertStatesMut
@@ -182,7 +177,7 @@ fun WearApp(viewModel: AppViewModel) {
                     .focusable()
             ) { x ->
                 val stage = day.stages[x]
-                val stageColor = stageColor(stage.name)
+                val stageColor = stageColors[x]
                 VerticalPager(
                     pageCount = stage.setTimes.size,
                     state = vertPagerStates[x],
@@ -227,7 +222,7 @@ fun WearApp(viewModel: AppViewModel) {
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center,
                             color = stageColor,
-                            text = set.artist
+                            text = set.artist,
                         )
                         Text(
                             modifier = Modifier.fillMaxWidth(),
@@ -248,13 +243,13 @@ fun WearApp(viewModel: AppViewModel) {
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center,
                             color = stageColor,
-                            text = stageName(stage.name)
+                            text = stage.name
                         )
                     }
                 }
             }
 
-            Box(contentAlignment = Alignment.BottomCenter) {
+            Box(modifier = Modifier.padding(top = 150.dp, start = 70.dp)) {
                 Column {
                     Button(
                         modifier = Modifier
@@ -317,7 +312,7 @@ fun WearApp(viewModel: AppViewModel) {
 val timeFormat: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
 val gridTimeFormat: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
-@Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
+@Preview(device = Devices.WEAR_OS_LARGE_ROUND, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
     val focusRequester = remember { FocusRequester() }

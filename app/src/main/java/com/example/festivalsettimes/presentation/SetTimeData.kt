@@ -3,55 +3,47 @@ package com.example.festivalsettimes.presentation
 import androidx.compose.ui.graphics.Color
 import java.time.LocalDate
 
-sealed class FestivalStage {
-    object KineticField : FestivalStage()
-    object CosmicMeadow : FestivalStage()
-    object CircuitGrounds : FestivalStage()
-    object NeonGarden : FestivalStage()
-    object Basspod : FestivalStage()
-    object Wasteland : FestivalStage()
-    object BionicJungle : FestivalStage()
-    object QuantumValley : FestivalStage()
-    object StereoBloom : FestivalStage()
-}
-
-fun stageName(stage: FestivalStage): String {
-    return when (stage) {
-        FestivalStage.KineticField -> "Kinetic Field"
-        FestivalStage.Basspod -> "Basspod"
-        FestivalStage.BionicJungle -> "Bionic Jungle"
-        FestivalStage.CircuitGrounds -> "Circuit Grounds"
-        FestivalStage.CosmicMeadow -> "Cosmic Meadow"
-        FestivalStage.NeonGarden -> "Neon Garden"
-        FestivalStage.QuantumValley -> "Quantum Valley"
-        FestivalStage.StereoBloom -> "Stereo Bloom"
-        FestivalStage.Wasteland -> "Wasteland"
+fun <T> interleave (xs: List<T>, ys: List<T>) : List<T> {
+    return if (xs.size != ys.size) {
+        val smaller = listOf(xs, ys).minBy { it.size }
+        val larger = listOf(xs, ys).maxBy { it.size }
+        val sizeDiff = larger.size - smaller.size
+        val fitted = larger.dropLast(sizeDiff)
+        val extra = larger.takeLast(sizeDiff)
+        fitted
+            .zip(smaller)
+            .flatMap { listOf(it.first, it.second)}
+            .plus(extra)
+    } else {
+        xs
+            .zip(ys)
+            .flatMap { listOf(it.first, it.second)}
     }
 }
 
-fun stageColor(stage: FestivalStage): Color {
-    return when (stage) {
-        FestivalStage.KineticField -> Color.Red
-        FestivalStage.Basspod -> Color.hsv(240f, 1.0f, 1.0f)
-        FestivalStage.BionicJungle -> Color.Green
-        FestivalStage.CircuitGrounds -> Color.Yellow
-        FestivalStage.CosmicMeadow -> Color.Cyan
-        FestivalStage.NeonGarden -> Color.hsv(30.0f, 1.0f, 1.0f)
-        FestivalStage.QuantumValley -> Color.White
-        FestivalStage.StereoBloom -> Color.hsv(300.0f, 1.0f, 1.0f)
-        FestivalStage.Wasteland -> Color.hsv(270.0f, 1.0f, 1.0f)
+fun stageColors(numStages: Int): List<Color> {
+    val inc = (360f / numStages)
+    var hue = 0.0f
+    var hues = emptyList<Float>()
+    for (i in 0 until numStages) {
+        hues = hues.plus(hue)
+        hue += inc
     }
+    val half = numStages / 2
+    val head = hues.subList(0, half)
+    val tail = hues.subList(half, numStages)
+    return interleave(head,tail).map { Color.hsv(it, 1f, 1f) }
 }
 
 data class FestivalDay(val date: LocalDate, val stages: List<Stage>)
-data class Stage(val name: FestivalStage, val setTimes: List<SetTime>)
+data class Stage(val name: String, val setTimes: List<SetTime>)
 data class SetTime(val artist: String, val start: String)
 
 val friday: FestivalDay = FestivalDay(
-    date = LocalDate.parse("2024-05-09", dateOnlyFormat),
+    date = LocalDate.parse("2024-05-10", dateOnlyFormat),
     stages = listOf(
         Stage(
-            FestivalStage.KineticField,
+            "Kinetic Field",
             listOf(
                 SetTime("Carola", "10:00"),
                 SetTime("Pauline Herr", "11:00"),
@@ -60,7 +52,7 @@ val friday: FestivalDay = FestivalDay(
             )
         ),
         Stage(
-            FestivalStage.CosmicMeadow,
+            "Cosmic Meadow",
             listOf(
                 SetTime("Frost-Top", "19:00"),
                 SetTime("Memba", "20:25"),
@@ -71,43 +63,43 @@ val friday: FestivalDay = FestivalDay(
             )
         ),
         Stage(
-            FestivalStage.CircuitGrounds,
+            "Circuit Grounds",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.NeonGarden,
+            "Neon Garden",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.Basspod,
+            "Basspod",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.Wasteland,
+            "Wasteland",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.QuantumValley,
+            "Quantum Valley",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.StereoBloom,
+            "Stereo Bloom",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.BionicJungle,
+            "Bionic Jungle",
             listOf(
                 SetTime("Carola", "19:00")
             )
@@ -118,7 +110,7 @@ val saturday: FestivalDay = FestivalDay(
     date = LocalDate.parse("2024-05-18", dateOnlyFormat),
     stages = listOf(
         Stage(
-            FestivalStage.KineticField,
+            "Kinetic Field",
             listOf(
                 SetTime("DJ RON", "19:00"),
                 SetTime("Backseat", "20:00"),
@@ -127,7 +119,7 @@ val saturday: FestivalDay = FestivalDay(
             )
         ),
         Stage(
-            FestivalStage.CosmicMeadow,
+            "Cosmic Meadow",
             listOf(
                 SetTime("Buttercream", "19:00"),
                 SetTime("Rizz", "20:25"),
@@ -138,43 +130,43 @@ val saturday: FestivalDay = FestivalDay(
             )
         ),
         Stage(
-            FestivalStage.CircuitGrounds,
+            "Circuit Grounds",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.NeonGarden,
+            "Neon Garden",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.Basspod,
+            "Basspod",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.Wasteland,
+            "Wasteland",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.QuantumValley,
+            "Quantum Valley",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.StereoBloom,
+            "Stereo Bloom",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.BionicJungle,
+            "Bionic Jungle",
             listOf(
                 SetTime("Carola", "19:00")
             )
@@ -185,7 +177,7 @@ val sunday: FestivalDay = FestivalDay(
     date = LocalDate.parse("2024-05-19", dateOnlyFormat),
     stages = listOf(
         Stage(
-            FestivalStage.KineticField,
+            "Kinetic Field",
             listOf(
                 SetTime("Arnold", "19:00"),
                 SetTime("Bach", "20:00"),
@@ -194,7 +186,7 @@ val sunday: FestivalDay = FestivalDay(
             )
         ),
         Stage(
-            FestivalStage.CosmicMeadow,
+            "Cosmic Meadow",
             listOf(
                 SetTime("Iron Man", "19:00"),
                 SetTime("Dr Strange", "20:25"),
@@ -205,43 +197,43 @@ val sunday: FestivalDay = FestivalDay(
             )
         ),
         Stage(
-            FestivalStage.CircuitGrounds,
+            "Circuit Grounds",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.NeonGarden,
+            "Neon Garden",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.Basspod,
+            "Basspod",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.Wasteland,
+            "Wasteland",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.QuantumValley,
+            "Quantum Valley",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.StereoBloom,
+            "Stereo Bloom",
             listOf(
                 SetTime("Carola", "19:00")
             )
         ),
         Stage(
-            FestivalStage.BionicJungle,
+            "Bionic Jungle",
             listOf(
                 SetTime("Carola", "19:00")
             )
